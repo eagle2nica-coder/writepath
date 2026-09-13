@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="312px" height="73px" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="229.09853249476208" y1="180.88259958070964" x2="263.06079664570535" y2="-6.119496855345901" id="LinearGradient334">
+      <stop id="Stop335" stop-color="#5d7cff" offset="0" />
+      <stop id="Stop336" stop-color="#4516ff" offset="0.44" />
+      <stop id="Stop337" stop-color="#7a66fe" offset="0.72" />
+      <stop id="Stop338" stop-color="#35cfff" offset="1" />
+      <stop id="Stop339" stop-color="#34ceff" offset="1" />
+    </linearGradient>
+    <pattern id="BGPattern" patternUnits="userSpaceOnUse" alignment="0 0" imageRepeat="None" />
+    <mask fill="white" id="Clip340">
+      <path d="M 30.5 61  C 13.419999999999998 61  0 47.58  0 30.5  C 0 13.419999999999998  13.419999999999998 0  30.5 0  L 269.5 0  C 286.58000000000004 0  300 13.419999999999998  300 30.5  C 300 47.58  286.58000000000004 61  269.5 61  L 30.5 61  Z " fill-rule="evenodd" />
+    </mask>
+  </defs>
+  <g transform="matrix(1 0 0 1 -986 -477 )">
+    <path d="M 30.5 61  C 13.419999999999998 61  0 47.58  0 30.5  C 0 13.419999999999998  13.419999999999998 0  30.5 0  L 269.5 0  C 286.58000000000004 0  300 13.419999999999998  300 30.5  C 300 47.58  286.58000000000004 61  269.5 61  L 30.5 61  Z " fill-rule="nonzero" fill="url(#LinearGradient334)" stroke="none" transform="matrix(1 0 0 1 992 479 )" class="fill" />
+    <path d="M 30.5 61  C 13.419999999999998 61  0 47.58  0 30.5  C 0 13.419999999999998  13.419999999999998 0  30.5 0  L 269.5 0  C 286.58000000000004 0  300 13.419999999999998  300 30.5  C 300 47.58  286.58000000000004 61  269.5 61  L 30.5 61  Z " stroke-width="4" stroke-dasharray="0" stroke="rgba(255, 255, 255, 0)" fill="none" transform="matrix(1 0 0 1 992 479 )" class="stroke" mask="url(#Clip340)" />
+  </g>
+  <style>svg { filter: drop-shadow(0px 4px 3px rgba(94, 47, 226, 0.49411764705882355)); }</style>
+</svg>
