@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta name="referrer" content="no-referrer" />
+    <title>赛事评审体验</title>
+    <style>
+      :root {
+        color-scheme: light;
+        background: #fff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      body {
+        background: #fff;
+      }
+
+      #viewport {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      #prototype-frame {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1422px;
+        height: 1080px;
+        border: 0;
+        background: #fff;
+        transform-origin: top left;
+        visibility: hidden;
+      }
+
+      #prototype-frame.ready {
+        visibility: visible;
+      }
+
+      #loading {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        margin: 0;
+        color: #52678f;
+        font: 600 15px/1.5 "Microsoft YaHei", "PingFang SC", sans-serif;
+        letter-spacing: 0.04em;
+      }
+
+      #loading.hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="viewport">
+      <iframe
+        id="prototype-frame"
+        src="./prototype/首页.html"
+        title="知径 AI 高保真原型"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <p id="loading" role="status">正在载入体验…</p>
+
+    <script>
+      "use strict";
+
+      const VIEWER_CONFIG = Object.freeze({
+        fallbackWidth: 1422,
+        fallbackHeight: 1080,
+        minWidth: 320,
+        minHeight: 480
+      });
+
+      const frame = document.querySelector("#prototype-frame");
+      const loading = document.querySelector("#loading");
+      let contentWidth = VIEWER_CONFIG.fallbackWidth;
+      let contentHeight = VIEWER_CONFIG.fallbackHeight;
+      let resizeFrame = 0;
+
+      function measurePrototype() {
+        try {
+          const frameDocument = frame.contentDocument;
+          const base = frameDocument && frameDocument.querySelector("#base");
+          const documentElement = frameDocument && frameDocument.documentElement;
+          const body = frameDocument && frameDocument.body;
+
+          contentWidth = Math.max(
+            VIEWER_CONFIG.minWidth,
+            base ? base.scrollWidth : 0,
+            body ? body.scrollWidth : 0,
+            documentElement ? documentElement.scrollWidth : 0,
+            VIEWER_CONFIG.fallbackWidth
+          );
+          contentHeight = Math.max(
+            VIEWER_CONFIG.minHeight,
+            base ? base.scrollHeight : 0,
+            body ? body.scrollHeight : 0,
+            documentElement ? documentElement.scrollHeight : 0,
+            VIEWER_CONFIG.fallbackHeight
+          );
+        } catch {
+          contentWidth = VIEWER_CONFIG.fallbackWidth;
+          contentHeight = VIEWER_CONFIG.fallbackHeight;
+        }
+      }
+
+      function fitPrototype() {
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        const scale = Math.min(viewportWidth / contentWidth, viewportHeight / contentHeight);
+        const renderedWidth = contentWidth * scale;
+        const renderedHeight = contentHeight * scale;
+
+        frame.style.width = `${contentWidth}px`;
+        frame.style.height = `${contentHeight}px`;
+        frame.style.transform = `translate(${Math.max(0, (viewportWidth - renderedWidth) / 2)}px, ${Math.max(0, (viewportHeight - renderedHeight) / 2)}px) scale(${scale})`;
+      }
+
+      function scheduleFit() {
+        window.cancelAnimationFrame(resizeFrame);
+        resizeFrame = window.requestAnimationFrame(fitPrototype);
+      }
+
+      frame.addEventListener("load", () => {
+        measurePrototype();
+        fitPrototype();
+        frame.classList.add("ready");
+        loading.classList.add("hidden");
+        window.setTimeout(() => {
+          measurePrototype();
+          fitPrototype();
+        }, 300);
+      });
+
+      window.addEventListener("resize", scheduleFit, { passive: true });
+    </script>
+  </body>
+</html>
