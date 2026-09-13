@@ -134,7 +134,7 @@ input {
   font-size: clamp(62px, 6.1vw, 104px);
   line-height: 0.96;
   font-weight: 950;
-  letter-spacing: -0.08em;
+  letter-spacing: 0.04em;
 }
 
 .hero-en {

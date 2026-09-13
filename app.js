@@ -7,7 +7,7 @@ const EXPERIENCE_CONFIG = Object.freeze({
   lockKey: "writepath_review_locked_until",
   maxAttempts: 5,
   lockDurationMs: 60_000,
-  backupUrl: "",
+  backupUrl: "http://git.writepath.art/",
   axureEntryCandidates: [
     "./prototype-viewer.html",
     "./prototype/首页.html",
